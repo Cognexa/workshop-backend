@@ -6,7 +6,7 @@ venv:
 
 run:
 	if [ ! -d ".venv" ]; then make venv; fi
-	. .venv/bin/activate && uvicorn main:app --reload
+	. .venv/bin/activate && uvicorn main:app --reload --host 0.0.0.0 --port 8080
 
 test-get:
 	# test the applications endpoint by sending a GET request
