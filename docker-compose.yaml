@@ -7,8 +7,13 @@ services:
       - "8080:8080"
     environment:
       - PYTHONUNBUFFERED=1
-    volumes:
-      - ./fastapi:/app
+    develop:
+      watch:
+        - action: sync
+          path: ./fastapi
+          target: /app
+          ignore:
+            - .venv
 
   flask:
     build:

@@ -4,7 +4,7 @@
 
 from fastapi import FastAPI
 from pydantic import BaseModel
-from fastapi.responses import JSONResponse, RedirectResponse
+from fastapi.responses import RedirectResponse
 import random
 
 app = FastAPI()
@@ -28,7 +28,12 @@ async def get_example():
 
 @app.post("/post")
 async def post_example(data: DataModel):
-    return JSONResponse(content={"message": "POST data received", "received_data": data.model_dump()})
+    return data
+
+
+@app.get("/hello")
+async def hello():
+    return {"message": "Hello World!"}
 
 
 @app.get("/async/{num}")
@@ -36,5 +41,5 @@ async def async_test(num: int):
     import asyncio
 
     # async wait 1-2 second - simulating a slow DB query
-    await asyncio.sleep(1 + random.random())
+    await asyncio.sleep(5 + random.random())
     return f":{num}:"
