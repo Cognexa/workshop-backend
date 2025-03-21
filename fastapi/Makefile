@@ -23,6 +23,13 @@ test-speed:
 	# /dev/null is a special file that discards all data written to it
 	seq 1 1000 | xargs -n 1 -P 1000 -I {} sh -c 'curl -s http://localhost:8080/async/{}'
 
+test-gcp:
+	# test the applications endpoint by sending a GET request 1000 times
+	# -n 1 specifies the number of arguments to pass to curl
+	# -P 1000 specifies the number of parallel processes to run 
+	# /dev/null is a special file that discards all data written to it
+	seq 1 1000 | xargs -n 1 -P 1000 -I {} sh -c 'curl -s https://workshop-backend-659178314699.us-central1.run.app/async/{}'
+
 build:
 	# build the docker image, --rm removes intermediate containers after a successful build
 	# --pull always attempts to pull a newer version of the base image
